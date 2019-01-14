@@ -1,0 +1,154 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Theory}
+This sections presents the understanding of the concepts used in this thesis in more elaborative way such that as reader it becomes easy to understand the facts and terminologies presented by that concept in the context of the problem . Here I will present two major concept which are soul of the thesis and each of two have subsections defined and explained under the constraint of the problem statement. 
+
+ \subsection{Coreference}
+It is the fundamental technique of the NLP to find the expressions in the text that make reference to same entity. This information is used as the preprocessing step for many other nlp tasks such as summarization and classification of docs, QA or sentiment analysis.
+
+\subsubsection{Key Terminologies}
+In order to clarify some jargons used in the field of coreference resolution, I begin with giving brief explanation of each of them .
+\begin{enumerate}
+  \item \textbf{Mention and Entity:} These terms got their name from MUC and ACE . According to ACE , en entity is "an object or set of objects in the world". For example Ace classified the name of the person, location or the organization as entities. These entities are textually represented by keywords such NP(Nominal Pronouns) etc . These textual labelling of entities are called Mentions.
+   
+   Add example here
+  
+  \item \textbf{Anaphor and Antecedent:} These are most common terms one hear in the coreference resolution. Anaphor is the expression that is referring to other expression, the antecedent in the sentence such that if it is replaced with the antecedent the linguistic meaning of the sentence won't change.
+  
+  Add the example here
+  
+   
+
+  \item \textbf{Pairwise/Mention-Pair Model:} Coreference models basically can be divided into two kinds one is Pairwise which classify whether two mentions are coreferent and then formning the coreference chains by combining all its decisons. Other one's are entity models which improve the coreference chains by not measuring the classification probability of two mentions instead it considers the probability of mention with the entire coreference chain.
+  
+  
+ \item \textbf{End-to-end System and Coreference Module:} End to End systems basically the systems which determines the coreference on the plain text. It by itself determines the mentions, their boundaries and using such information it forms the coreference chains. While on the other hand, coreference module requires data to have lingusitic information such mentions boundaries , Pos, parse trees.
+ 
+ \item \textbf{True/Gold mentions and system Mentions:} Mentions created by Human in text are called True/Gold mentions where as mentions of the system output are called system mentions.
+ 
+ 
+ 
+\end{enumerate}
+
+\subsubsection{Types of Coreference}
+
+\begin{enumerate}
+\item \textbf{Anaphora}: When the referring expression by the precedes antecedent.
+
+\textbf{Example:} The music was so loud that it couldn't be enjoyed. –The anaphor it follows the expression to which it refers (its antecedent).
+b. Our neighborsi dislike the music. If theyi are angry, the cops will show up soon. – The anaphor they follows the expression to which it refers (its antecedent)
+
+
+\item \textbf{Cataphora}: When the refering expression precedes the antecedent.
+\textbf{Example:}  If theyi are angry about the music, the neighborsi will call the cops. – The cataphor they precedes the expression to which it refers (its postcedent).
+\textbf{Example:}  Despite heri difficulty, Wilmai came to understand the point. – The cataphor her precedes the expression to which it refers (its postcedent)
+
+\item \textbf{Pronoun Resolution} : when the referring expression is pronoun.
+
+\textbf{Example:} thisnsisis
+
+\item \textbf{Noun Resolution} : when the referring expression is pronoun.
+
+\end {enumerate}
+\subsection{Coreference Resolution}
+It is the technique used to find the corferential entities in the discourse. It is considered to be very complex task from very beginning since the 6th MUC has started and ACE started the project. The project was started to develop more sophisticated solutions. Since from that time esearches have actively participated in the task and developed various number of system from heuritics based to statistical to machine learning.
+
+
+\subsubsection{Why Coreference Resolution is so Hard?}
+The field has long history of research beacause the problem in hand of finding coreference chains are very hard. Lets take an example
+\begin {enumerate}
+
+\item The policemen refused the women a permit for the demonstration because they feared violence.
+\item The policemen refused the women a permit for the demonstration because they advocated violence
+
+\end {enumerate}
+In this pronoun 'they' is referrring  different entities in both sentences. So the reslovers need more sophisticated semantic, lexical and world knowledge for better forming the relations. Example of such information can be gender, number semantic class. Another catch to it is, these information when used alone are not compleletly reliable. Lets say we have two NP's London and the capital they are potentially cor
+But these information is not completly reliable use when used alone. example two NP's Albert Einstien and Mr.Einstien if we use Head Noun Match information these two become potentially coreferent entities but if the context is changed they might not.
+
+\subsubsection{Algorithms}
+The alogrithms can broadly divided into machine learning and non-machine learning (e.g Heuritics, tree based)
+All non machine learning algorithms under the core use the similar four steps. 
+
+\begin {enumerate}
+
+\item \textbf{Entities Indentificaton:} Identify Noun phrases in the text and labelled them as definite, demonstrative, proper etc. This is done using the POS tagger. 
+
+\item \textbf{Representation of NPs:} Represent the generated Noun phrases in feature vectors. Folowing the list of features can be used for creating feature vectors.
+
+\begin {enumerate}
+\item \textbf{Head Noun:}  Last Word of NP
+\item \textbf{Location:} Position in the document  
+\item \textbf{Pronoun type:}  Nominative, Accusative
+\item \textbf{Article:}  Definite, indefinite
+\item \textbf{Appostive:}  e.g commas etc 
+\item \textbf{Number:}  plural, singular
+\item \textbf{Proper name:}  e.g captialization
+\item \textbf{Gender:}  masculine, feminine, neutral
+\end {enumerate}
+
+\item \textbf{Distance between NPs:} Different algorithms use different distance metrics. For example one of the algorithm is given by Cardie et al. (1999). As per the distance between the NP1 and NP2 can be derived as following.
+
+$\text{dist(NP1, NP2)= } \sum \mathbf{wf * incompatibilityf(NP1,NP2)} $ \\ \\
+The summation \\
+\textbf{F}: set of features \\
+\textbf{wf} weight of feature f \\
+\textbf{incompatibilityf}: degree of incompatibility between NP1 and NP2 
+
+
+
+
+
+\item \textbf{Equivalence Class Creation:}  Clustering algorithms are used to merge two NP's in one class if their distance is less threshold value. The threshold is parameter choice of the algorithm.
+
+\end {enumerate}
+
+
+
+
+
+
+These were the early attempts made to the corefrence resolutions. Motivation behind was to prune the unlikely antecedent candidate recursively until a threshold set is obtained. Once a desired set is achieved model selects the best candidate from it based on the Heuritics used. For pruning, various approches were used like multitude features, gender information and other pragmatic constrants like semantic information of mention.
+
+
+Using  heuritucs techniques, Hobbs developed a deep tree based search algorithm to effictively find the candidate antecedent satisfying the heuristics. The search starts at dominating Noun Phrase (NP) of the pronoun and it goes from left to right until the first match of the correct gender and number is found. He analyzed over 100 examples from different texts and found its model performs 72.7 accuracy. Following the same heuritics approach, Lappin and Leass [31] developed the Resolution Anaphora Procedure algorithm to operate on syntatic structure and state model. It achieved the accuracy of 86. Even though it performed well downside of this solution is that RAP requires a full syntactic parser, Kennedy and Boguraev [32] presented the solution to this overhead they presented the model having parse tree substituted with POS (part of speech) phrasal features. It achieved the accuracy of 75.4
+
+
+\subsubsection{Supervised Approach}
+
+Seening the rise of machine learning in multiple field urged the researches to apply the approach to this problem . From there ownwards the research shapes into two machine learning methods 1. Two-step binary classification clustering 2.Ranking approach. Binary classification differ from ranking in how they handle antecdent candidates. Binary classification make decisions independent of antecdent while the ranking considers them in their decison making .
+
+\begin {enumerate}
+\item \textbf{Binary Classification:}
+It involves two steps. In step 1 is classification is perfomed where classifer predicts  candidate antecedent for each anaphor. In Step2 is a clustering  where clustering algorithm uses the decisions generated in step 1 and generates the list of clusters for all mentions of the document. This process is called the mention-pair modelling .In Entity pair modelling during step1 classifier predicts whether mention is coreferent with the entity chain or not. Step 2 is common in both cases.
+
+
+\begin {enumerate}
+\item \textbf{Mention-pair model:}
+For generating the candidate antecedents two different researches have been tested. 1. Linkfirst (Soon et al., 2001; Strube et al., 2002) which irst compares to each candidate mention from right to left and continues until the beginning of the text is reached or classifier returns a probability of 0.5 or above. 2. the best first lassfier computes the probabilty for all the mentions preceding the mention and picks the one having the probabilty of 0.5 or above.
+
+
+\item \textbf{Entity Mention Model:}
+Contrast to mention-pair models , it uses the information of the other mentions in the entity chains for forming the clusters. This is uselful in the case when judging the coreference among the two mentions is not possible using when using the pair information alone. s Luo et al. (2004) created the first system using this model .They created the Bell tree represntation of all the possibiluty clusters and used the best path from root to the leaves as the cluster. Training instances for this model comprises of anaphor and cluster of preceding mentions. The mechanism to counter the imbalance of the postive and negative instance same mechanims are used as they are in the mention pair models. Additionaly more features are added summarising the relation between anaphor and partial cluster. Culotta et al. [52] proposed these cluster-level features  which uses  first-order logic to expand pairwise features
+\end {enumerate}
+\item \textbf {Ranking Models:}
+Both mention-pair and entity mention pair model consider each candidate independently. This way they are not able to measure the how each mention as antencdent is ranked relative to the other candidate antecedents. To address this ranking models are defined. It examines more then one candidate simultaneously and captures the ranks of them.  Connolly et al. (1994) defined the first ranking model which ranks positive and negative candidate mention , it is further used by  Yang et al. (2003) by the name of twin-candidate model.
+
+\end {enumerate}
+
+
+\subsubsection{Evaluation:}
+Because of the reflexive and transitive nature of the coreference relation it won't be justifiable by just
+To address this [84] a scheme was developed to compare the  based compare quivalence classes rather than links themselves. It used the standard IR metrics for precision , recall and  F-score. Recall errors are computed by counting the least number the number of links required to be added to the system to match itself with  gold standard . Similary precision errors are calclulated by reversing system output and gold standard. This metric system does not differentiate the errors happend in the larger chains from smaller ones for placing the markable in wrong chain. This is identified by Bagga and Baldwin [85]. They proposed the revision metric B3 which look to the presence or absence of entities in other equivalence classes before measuring the recall and precison.  Luo [86] pointed out that this metric use the entity more then once for aligning the system output to the gold standard. They introduced a new mechanism Constrained Entity-Alignment F-Measure (CEAF). which improves the problem of the B3 by only having one-to-one alignment of the gold standard chains and system output chains.
+
+To address this [84] a scheme was developed to compare the  based compare quivalence classes rather than links themselves. It used the standard IR metrics for precision , recall and  F-score. Recall errors are computed by counting the least number the number of links required to be added to the system to match itself with  gold standard . Similary precision errors are calclulated by reversing system output and gold standard. This metric system does not differentiate the errors happend in the larger chains from smaller ones for placing the markable in wrong chain. This is identified by Bagga and Baldwin [85]. They proposed the revision metric B3 which look to the presence or absence of entities in other equivalence classes before measuring the recall and precison.  Luo [86] pointed out that this metric use the entity more then once for aligning the system output to the gold standard. They introduced a new mechanism Constrained Entity-Alignment F-Measure (CEAF). which improves the problem of the B3 by only having one-to-one alignment of the gold standard chains and system output chains.
+
+
+
+
+
+
+
+\end{document}
