@@ -1,4 +1,5 @@
 \documentclass[11pt]{article}
+\usepackage{amsmath}
 
 \begin{document}
 
@@ -56,11 +57,63 @@ b. Our neighborsi dislike the music. If theyi are angry, the cops will show up s
 It is the technique used to find the corferential entities in the discourse. It is considered to be very complex task from very beginning since the 6th MUC has started and ACE started the project. The project was started to develop more sophisticated solutions. Since from that time esearches have actively participated in the task and developed various number of system from heuritics based to statistical to machine learning.
 
 
-\subsubsection{Heuritics approach}
-These were the early attempts made to the corefrence resolutions. Motivation behind was to prune the unlikely antecedent candidateddntil a threshold set is obtained and once a desired set is achieved then select the best candidate from it. For pruning, various approches were used like multitude features, gender information and other pragmatic constrants like semantiyyinformation of mention.
+\subsubsection{Why Coreference Resolution is so Hard?}
+The field has long history of research beacause the problem in hand of finding coreference chains are very hard. Lets take an example
+\begin {enumerate}
+
+\item The policemen refused the women a permit for the demonstration because they feared violence.
+\item The policemen refused the women a permit for the demonstration because they advocated violence
+
+\end {enumerate}
+In this pronoun 'they' is referrring  different entities in both sentences. So the reslovers need more sophisticated semantic, lexical and world knowledge for better forming the relations. Example of such information can be gender, number semantic class. Another catch to it is, these information when used alone are not compleletly reliable. Lets say we have two NP's London and the capital they are potentially cor
+But these information is not completly reliable use when used alone. example two NP's Albert Einstien and Mr.Einstien if we use Head Noun Match information these two become potentially coreferent entities but if the context is changed they might not.
+
+\subsubsection{Algorithms}
+The alogrithms can broadly divided into machine learning and non-machine learning (e.g Heuritics, tree based)
+All non machine learning algorithms under the core use the similar four steps. 
+
+\begin {enumerate}
+
+\item \textbf{Entities Indentificaton:} Identify Noun phrases in the text and labelled them as definite, demonstrative, proper etc. This is done using the POS tagger. 
+
+\item \textbf{Representation of NPs:} Represent the generated Noun phrases in feature vectors. Folowing the list of features can be used for creating feature vectors.
+
+\begin {enumerate}
+\item \textbf{Head Noun:}  Last Word of NP
+\item \textbf{Location:} Position in the document  
+\item \textbf{Pronoun type:}  Nominative, Accusative
+\item \textbf{Article:}  Definite, indefinite
+\item \textbf{Appostive:}  e.g commas etc 
+\item \textbf{Number:}  plural, singular
+\item \textbf{Proper name:}  e.g captialization
+\item \textbf{Gender:}  masculine, feminine, neutral
+\end {enumerate}
+
+\item \textbf{Distance between NPs:} Different algorithms use different distance metrics. For example one of the algorithm is given by Cardie et al. (1999). As per the distance between the NP1 and NP2 can be derived as following.
+
+$\text{dist(NP1, NP2)= } \sum \mathbf{wf * incompatibilityf(NP1,NP2)} $ \\ \\
+The summation \\
+\textbf{F}: set of features \\
+\textbf{wf} weight of feature f \\
+\textbf{incompatibilityf}: degree of incompatibility between NP1 and NP2 
 
 
-Using  heuritucs techniques Hobbs developed an  tree based search algorithm to effictively find the candidate antecedent. The search starts at dominating Noun Phrase (NP) of the pronoun and it goes from left to right until the first match of the correct gender and number is found. He analyzed over 100 examples from different texts and found its model performs 72.7 accuracy. Following the same heuritics approach, Lappin and Leass [31] developed the Resolution Anaphora Procedure algorithm to operate on syntatic structure and state model. It achieved the accuracy of 86. Even though it performed well downside of this solution is that RAP requires a full syntactic parser, Kennedy and Boguraev [32] presented the solution to this overhead they presented the model having parse tree substituted with POS (part of speech) phrasal features. It achieved the accuracy of 75.4
+
+
+
+\item \textbf{Equivalence Class Creation:}  Clustering algorithms are used to merge two NP's in one class if their distance is less threshold value. The threshold is parameter choice of the algorithm.
+
+\end {enumerate}
+
+
+
+
+
+
+These were the early attempts made to the corefrence resolutions. Motivation behind was to prune the unlikely antecedent candidate recursively until a threshold set is obtained. Once a desired set is achieved model selects the best candidate from it based on the Heuritics used. For pruning, various approches were used like multitude features, gender information and other pragmatic constrants like semantic information of mention.
+
+
+inrroducUsing  heuritucs techniques, Hobbs developed a deep tree based search algorithm to effictively find the candidate antecedent satisfying the heuristics. The search starts at dominating Noun Phrase (NP) of the pronoun and it goes from left to right until the first match of the correct gender and number is found. He analyzed over 100 examples from different texts and found its model performs 72.7 accuracy. Following the same heuritics approach, Lappin and Leass [31] developed the Resolution Anaphora Procedure algorithm to operate on syntatic structure and state model. It achieved the accuracy of 86. Even though it performed well downside of this solution is that RAP requires a full syntactic parser, Kennedy and Boguraev [32] presented the solution to this overhead they presented the model having parse tree substituted with POS (part of speech) phrasal features. It achieved the accuracy of 75.4
 
 
 \subsubsection{Supervised Approach}

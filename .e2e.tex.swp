@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{End-to-end Neural Coreference Resolution}
+IN 2017 Kenton Lee et. al [], designed the neural model which surpassed the results of previous state of the art neural resolver developed by Mannin[] with perfomance gain of 1.5 F1 on the OntoNotes benchmark. In their algorithms they shows that the results can be achieved without the need of the syntatic parser or hand engineered mention detector. They considered all the spans in the document with their possible set of  antecedent and used the ranking algorithm to find the best antecedent among them. Furthermore they optimized the model to maximize the marginal likelihood of antecedent span with the gold antecedent.
+
+
+\subsection{Algorithm}
+To formulate the task for the model,  they first divided the document let say D into T words and computed total number of spans(yi) which equals to  T(T +1) 2. The spans are then ordered with index of it in D. Further each span let say span(i) is assigned a dummny antecedent r and  set of preceding spans ranging from {r, 1.....i-1}. Dummy antecedent  will assigned to the span under two cases: (1) If span is not an entity mention and (2) if its a entity mention but its not having span coreferent span. FInally performed the clustering to generate clusters that are connected by same antecedents.
+
+
+In nutshell, models learns the conditional probability distribution \\ P(y1, . . . , yN | D) which  is used to produce the correct clustering. To calculate they used following equation:
+
+here s(i, j) is a pairwise  coreference link score  between span i and  its antecedent  j in document D. Three factors influence the score: (1) is i a mention (2) is j a mention (3) is j a antecedent of i.
+
+s(i, j) = ( 0 j =  sm(i) + sm(j) + sa(i, j) j 6=   Add the equation
+
+sm() function calculates the score of span to be entity mention and sa(i,j) value is the pairwise score of j to be antecedent of i. s(i, j) represents the final score of the span i and j to be coreferent. 
+
+
+
+\textbf{Span Representation: }Algorithm begins with finding the vector representation of each span. They added the context surrounding and mention internal structure information. Furher they used  bidirectional LSTM (Hochreiter and Schmidhuber, 1997) to  encode the lexical information for  inside and outside of span and moreover to model the head word they added attention mechanism in each span.
+
+
+\textbf{Scoring Architecture: }The final score for two spans to be referent is summing thier mention score with their pairwise antecedent score.  Fig represents the second step or the scoring pipeline of the algorithm. The final score for two spans to be referent is summing thier mention score with their 
+. Standard feed forward neurals are used to calculate both scoring  functions mention dectection (sm) and pairwise (sa):
+ 
+
+
+sm(i) = wm · FFNNm(gi)
+add the equation
+
+
+
+\subsection{Analysis}
+In the paper, they have presented the example:
+A fire in a Bangladeshi garment factory) has left at least 37 people dead and 100 hospitalized. Most
+of the deceased were killed in the crush as workers tried to flee (the blaze) in the four-story building.
+
+The words labelled in red color are predicted in the colors are coreferent to each other. The advantage of using the attention mechanism can be clearly in attentiveness paid by model in predicting the cluster fire and blaze. Similarly mention Bangladeshi garment factory corefers correctly to four-story building instead of factory. The model has shown positive results in predicting long and complex noun phrases. But using neural networks for generating the word embeddings has shown some downsides of predicting false positives. In the example in paper, (The flight attendants) have until 6:00 today to ratify labor concessions. (The pilots’) union and ground crew did so yesterday. The model has wrongly predicted the clusters. Writers pointed two reason of failure 1. Model requires large external world knowledge and 2. large training data to overcome such scattered patterns.
+
+
+
+\end{document}

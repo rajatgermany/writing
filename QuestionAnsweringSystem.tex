@@ -1,0 +1,133 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Question Answering System}
+Question Answering system(QA) has been around us from quite some time now. It has started well as a Information Reterival system where user query and system responds with the list of documents to present day where we have bunch of IR systems like Google, Bing, Aol on www etc handling millions of queries every day. These systems have become part of modern human life. To add further recently we have got more advance QA systems like alexa and Siri where human put the query in his or her voice and the system replies back with precise answer. Table list key difference between the IR and QA systems.
+
+
+
+
+Search engines also now taking the path of QA systems and becoming more sophisticated with their answer precision over time. Fig shows the difference of past and present times of search engine. 
+
+
+But still the serach engines are struggling with complex queries as shown in Fig []
+
+
+QA systems is a multidisciplinary field. It comprises of various field as shown in Fig[].
+
+\begin{enumerate}
+
+\item \textbf{Information Reterival:} Process of reteriving relevant information from the collection of the resources.
+
+\item \textbf{Artificial Intelligence:} Research field of computer science associated with creating intelligent machines to work like human.
+
+\item \textbf{Software Engineering:} Principles to design software.
+
+\item \textbf{NLP:} Field of research to process human natural language.
+
+\end{enumerate}
+
+
+Following are types of QA systems which are developed and researched about:
+
+\begin{enumerate}
+
+\item \textbf{Open Domain:}
+
+
+ \begin{enumerate}
+
+\item Answers query from any corpus.
+
+\item Low Accuracy
+
+\item Developer or user need low or no domain expertise.
+
+\item \textbf{Add Example Here:} 
+
+\end{enumerate}
+
+
+\item \textbf{Closed Domain:} 
+
+\begin{enumerate}
+
+\item Domain specific queries
+
+\item High Accuracy
+
+\item Domain expertise required.
+
+\item \textbf{Add Example Here:} 
+
+\end{enumerate}
+
+\item \textbf{Factoid:} Answers queries based on concise facts. For ex \textbf{Where is Darmstadt ?} 
+
+\item \textbf{Non-Factoid:} Answer about anything with queries ranging from space technology to space industry.
+
+
+\end{enumerate}
+
+\subsection{Architecture}
+
+The architecture can be braodly be divided into two types. First one is traditional architecture which are primarly well worked for IR systems and for search engines for long time. The basic pipeline is shown in Fig
+
+
+. 
+Following are the list of the main components with thier prominent tasks.
+
+\begin{enumerate}
+
+\item \textbf{Question Processing:} 
+\begin{enumerate}
+\item \textbf{Question Classfication:} Question is classified on behalf of its semantic meaning. Example of classification classes are How, Where, Why, What. Module classifies answers in one of these categories.
+\item \textbf{Predicting answer type:} Map the answer type to the question type.
+\item \textbf{Reformulation of Question:} Normalize the question into semantically suitable for the next module.
+
+
+
+\end{enumerate}
+
+\item \textbf{Document Retreival:} It ranks the candidate answers based on the constraints set up in the system.For ex constraints can be  answer to be recent in nature, highly user viewed answer or question keywords contained in answer.
+ 
+
+\item \textbf{Answer Processing:} 
+\begin{enumerate}
+\item \textbf{Answer Identification:} 
+\item \textbf{Answer Extraction:} 
+\item \textbf{Answer Validation:} 
+
+\end{enumerate} 
+
+
+\end{enumerate}
+
+In the last couple of years many deep learning practioners and researchers have been trying to experiment the neural network wonders in QA systems. Folowwing to that, such experiments have shown bright signs and this has advocated by itself that modern QA systems will be heavily inclined towards neural networks and NLP techniques. To support and to generate movitation for the same, Allen AI insitutue project Aris and IBM project Watson are two big and strong examples of the modern day neural based QA systems. Following are the 
+building blocks of modern deep learning QA systems 
+
+
+\begin{enumerate}
+\item \textbf{Fully Connected Network:} It is the workhorse of the deep learning. Complex models like QA are generated using these network with vaired number of layers and units in each layer.
+
+
+ 
+\item \textbf{Word Embedding:} It is a one-hot vector representation of words in the text. Examples algorithms are Word2Vec, InferSent and Sent2Vec[].
+
+\item \textbf{Convolutional Network Networks:} Convolutional Network Networks are deep learning architecture usually used in image recogniztion but it can also be used in QA systems to exploit the proximity of  word and generate the meaning of the sentence.
+
+ \item \textbf{Recurrent Neural Networks:} Recurrent Neural Networks(RNN) are designed to work with the sequential data such as text, audio or video. It forms the directed graph between the nodes and use its internal state to perform the temporal dynamic action on a sequence.
+
+
+Some of the notable QA system built using deep learning models are Snigber [], in which he trained the RNN end to end. Another one is Mi [] they applied the LSTM  for thier answer selection and also used BiDirectional LSTM to build the embeddings for the question and answers and measure their closeness using the cosine similarity. Arushi use DMN to build network and tested on babl dataset from facebook and achieved the state of the art results.
+
+
+ 
+\end{enumerate} 
+
+ 
+
+
+\end{document}
