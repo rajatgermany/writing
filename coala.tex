@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{COALA}
+
+In this thesis, I have considered using community based QA system developed by Andreass Ruckele from Ukp Lab Tu Darmstadt. They have nicknamed the system to be COALA which stands for compare aggregator for long answers.
+It is neural based system inspired from state of the art model by WANG[]. IN their design they have addressed three major challenges and given the solution to each of it. With their additions, the system not only is simpler but also has surpassed the WANG models by large margins.
+
+
+
+
+Following are the three major challenges:
+\begin {enumerate}
+
+\item Inability to deal with long answers.
+\item Complex deep neural architectures.
+\item Non consideration of linguistic structure of sentences.
+\end {enumerate}
+
+WANG's model aggregates the coverage of the answer aspects to question and find which of the candidate answer matches best to the question whereas COALA focus on  question aspects and computes to what extent question aspects are matched by the answer. This approach helps in solving the difficulty of dealing with long answers.
+\textbf {Improve thssss man}
+
+Modern CQA system use compare aggregator framework to find the relevance of answer with respect to question. COALA has used simple max pooling  and averaging technique in place of attention-based alignment.This has made the model simpler and easy to work on low resources. Lastly to use the linguistic structures of sentences COALA is extensible to complex aggregator functions.
+
+\subsection{Design}
+
+The answer selection can be formalized as:
+
+
+
+Below two subsections will explain about the choices can be made in choosing 
+
+\subsubsection{Aspect Identification}
+
+Aspects are the context in the text that can be identified as anything from indiviual words to n-grams or any other expressions such that they can be represnted with syntatic and semantic information. In COALA to find aspects of both question and answer both are represented in vector form of n-grams2 such that Q 
+\textbf{add equation here}. CNN is then applied to these vectors to learn the aspects for both.
+
+\textbf{add equation here}
+
+
+\subsubsection{Relevance Matching}
+After determing the aspects of both the question and answer, the matching of both the aspects is computed in three steps: 
+
+\begin{enumerate}
+
+\item \textbf{Interaction:}
+Interaction between Q and A can be modelled as dot product of \textbf{add equation here} . The interaction is denoted by matrix such as:
+
+\textbf{add equation here} 
+
+In Matrix ith row and jth column value denotes the interaction of aspect ith of question to the jth aspect of the answer.
+
+\item \textbf{Aspect Matching:} This gives the value how well ith aspect of the question matching to all the aspects of the answers by the filtering the maxiumum of row ith of H
+
+\textbf{add equation here} 
+
+\item \textbf{Aggregation:} COALA uses the aggregation function g to calculate the score from the sequence (c)
+
+\textbf{add equation here} 
+
+
+
+\subsection{Performance}
+
+COALA is experimented with 5 different QA datasets as show in figure []. Each data set differs from each other in terms of number of training data and length of candidate answers. Figure shows the performance of the COALA, WANG and baseline model accuracies as function of avergae of questions. COALA clearly outperforms the state of the art model .
+
+
+
+\end {enumerate}
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+z
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
